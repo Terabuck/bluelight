@@ -18,11 +18,11 @@
  - **Reminder** the DICOMWeb Plugin of the DICOM server shall be installed first. 
  
 ## About
-* BlueLight是少數能在網頁上顯示3D VR、MIP及MPR的開源DICOM瀏覽系統，它擁有平易近人的操作介面並支援RWD及Web零足跡瀏覽，可在任意大小的裝置上執行。
-* 標記顯示方面支援RTSS、Overlay、Graphic Annotation、AIM等標記，亦可於3D系統中轉換成3D標記。
-* 此專案亦支援LabelImg格式的標記繪製。
-* 3D VR顯示模式支援染色、窗度、透明、壓縮、貼皮、內插、降噪、打光、挖洞及最大密度投影，針對骨骼及肺氣管有專門的顯示模式，MPR模式則支援內插、貼皮、染色以及3D切面的顯示。
-* 通過台灣醫學資訊聯測 MI-TW 2020 - Track 4: DICOMWeb Query/Retrieve Consumer
+* BlueLight is one of the few open source DICOM browsing systems that can display 3D VR, MIP, and MPR on the web. It has an easy-to-use interface and supports RWD and Web zero-footprint browsing. It can be executed on devices of any size.
+* Marker display supports RTSS, Overlay, Graphic Annotation, AIM and other markers, and can also be converted into 3D markers in the 3D system.
+* This project also supports label drawing in LabelImg format.
+* The 3D VR display mode supports dyeing, windowing, transparency, compression, skinning, interpolation, noise reduction, lighting, digging, and maximum density projection. There are special display modes for bones and lungs, and MPR mode supports interpolation , skinning, staining and display of 3D slices.
+* Through Taiwan Medical Information Joint Test MI-TW 2020 - Track 4: DICOMWeb Query/Retrieve Consumer
 
 ## Key Features
 ### Network support
