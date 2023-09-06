@@ -238,7 +238,7 @@ function parseDicomW(image, pixelData, viewportNum0, WindowLevelObj) {
     element.imageHeight = image.height;
 
     var HandW = getViewprtStretchSize(element.imageWidth, element.imageHeight, element);
-    element.style = "position:block;left:100px;width:" + element.imageWidth + "px;height:" + element.imageHeight + "px;overflow:hidden;border:" + bordersize + "px #D3D9FF groove;";
+    element.style = "position:block;left:100px;width:" + element.imageWidth + "px;height:" + element.imageHeight + "px;overflow:hidden;border:" + bordersize + "px #89d7b5 solid;";
     element.sop = element.SOPInstanceUID;
 
     element.windowWidthList = windowwidth;
@@ -246,11 +246,11 @@ function parseDicomW(image, pixelData, viewportNum0, WindowLevelObj) {
     // showTheImage(element, image, 'windowLevel', null, viewportNum);
 
     var WandH = getFixSize(window.innerWidth, window.innerHeight, element);
-    element.style = "position:absolute;left:100px;width:calc(100% - " + (100 + (bordersize * 2)) + "px);" + "height:" + WandH[1] + "px;overflow:hidden;border:" + bordersize + "px #D3D9FF groove;";
+    element.style = "position:absolute;left:100px;width:calc(100% - " + (100 + (bordersize * 2)) + "px);" + "height:" + WandH[1] + "px;overflow:hidden;border:" + bordersize + "px #89d7b5 solid;";
     element.sop = element.SOPInstanceUID;
     SetTable();
     GetViewport().style.backgroundColor = "rgb(10,6,6)";
-    GetViewport().style.border = bordersize + "px #FFC3FF groove";
+    GetViewport().style.border = bordersize + "px #488b3a solid";
 
     var MainCanvas = element.canvas();
     var MarkCanvas = GetViewportMark((viewportNum));

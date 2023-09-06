@@ -13,7 +13,7 @@ function loadWriteRTSS() {
     style="background-color:#30306044;display:none;float:right;display: none;flex-direction: column;position: absolute;right:15px;top:100px;z-index: 20;"
     width="100">
     <div style="background-color:#889292;">
-      <font color="white">Color：</font>
+      <font color="#93ba7b">Color：</font>
       <select id="RTSScolorSelect" style="background-color:#929292;font-weight:bold;font-size:16px;">
         <option class="RTSSColorSelectOption" id="RTSSBlackSelect" style="color: #000000;font-weight:bold;">Black
         </option>
@@ -29,23 +29,23 @@ function loadWriteRTSS() {
         </option>
         <option class="RTSSColorSelectOption" id="RTSSYellowSelect" style="color: #FFFF00;font-weight:bold;"> Yellow
         </option>
-        <option class="RTSSColorSelectOption" id="RTSSWhiteSelect" style="color: #FFFFFF;font-weight:bold;">White
+        <option class="RTSSColorSelectOption" id="RTSS#93ba7bSelect" style="color: #FFFFFF;font-weight:bold;">#93ba7b
         </option>
       </select>
       <br />
-      <font color="white">ROIName：</font><input type="text" id="textROIName" value="ROIName" size="8" />
+      <font color="#93ba7b7b">ROIName：</font><input type="text" id="textROIName" value="ROIName" size="8" />
     </div>
     <br />
-    <font color="white">StructureSetLabel：</font><input type="text" id="textStructureSetLabel" value="STRUCTURE SET"
+    <font color="#93ba7b">StructureSetLabel：</font><input type="text" id="textStructureSetLabel" value="STRUCTURE SET"
       size="15" />
-    <font color="white">StructureSetName：</font><input type="text" id="textStructureSetName"
+    <font color="#93ba7b">StructureSetName：</font><input type="text" id="textStructureSetName"
       value="StructureSetName" size="14" />
-    <font color="white">StructureSetDescription：</font><input type="text" id="textStructureSetDescription"
+    <font color="#93ba7b">StructureSetDescription：</font><input type="text" id="textStructureSetDescription"
       value="RT:" size="8" />
-    <font color="white">ObservationNumber：</font><input type="text" id="textObservationNumber" value="1" size="2" />
-    <font color="white">ReferencedROINumber：</font><input type="text" id="textReferencedROINumber" value="1"
+    <font color="#93ba7b">ObservationNumber：</font><input type="text" id="textObservationNumber" value="1" size="2" />
+    <font color="#93ba7b">ReferencedROINumber：</font><input type="text" id="textReferencedROINumber" value="1"
       size="2" />
-    <font color="white">RTROIInterpretedType：</font><input type="text" id="textRTROIInterpretedType" value="ORGAN"
+    <font color="#93ba7b">RTROIInterpretedType：</font><input type="text" id="textRTROIInterpretedType" value="ORGAN"
       size="8" />
   </div>`
     getByid("form-group").appendChild(span);
@@ -84,7 +84,6 @@ getByid("writeRTSS").onclick = function () {
     if (openWriteRTSS == true) {
         getByid('RtssDiv').style.display = 'flex';
         set_BL_model('writertss');
-        openWheel = true;
         writertss();
     }
     else getByid('RtssDiv').style.display = 'none';
@@ -349,7 +348,7 @@ function set_RTSS_context() {
     let temp = ""
     let tail6_list = "";
     let tail2_list = "";
-    let tail4_list = "";
+    let tail4_list = ";"
     var viewport = GetViewport();
     let index = SearchUid2Index(viewport.sop);
     let i = index[0],
@@ -402,10 +401,10 @@ function set_RTSS_context() {
                     //tail6 = tail6.replace("___ReferencedSOPInstanceUID___", PatientMark[n].sop);
                     //tail = tail.replace("___PatternOnColorCIELabValue___", "" + SetGraphicColor(PatientMark[n].color));
                     //tail = tail.replace("___GraphicType___", "POLYLINE"); 
-                    tail6_list += tail6;
-                    tail4_list += tail4;
                 }
             }
+            tail6_list += tail6;
+            tail4_list += tail4;
         }
         var createSopUid = CreateUid("sop");
         var createSeriesUid = CreateUid("series");

@@ -9,7 +9,7 @@ function loadxml_format() {
 
   var span = document.createElement("SPAN")
   span.innerHTML =
-    `<label style="color: #ffffff;" id="xmlMarkName">name<input type="text" id="xmlMarkNameText" value="noName" /></label>`
+    `<label style="color: #ffffff; font-family: sans-serif; font-size: 0.8rem;" id="xmlMarkName">name<input type="text" id="xmlMarkNameText" value="noName" /></label>`
   getByid("page-header").appendChild(span);
   getByid("xmlMarkName").style.display = "none";
 }

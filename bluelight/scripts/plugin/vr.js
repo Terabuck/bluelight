@@ -51,7 +51,7 @@ function loadVR() {
         <option id="o3DMip">MIP</option>
         <option id="o3DMinIP">MinIP</option>
       </select>
-      <font color="white" id="o3dAlphaValueLabel">Alpha：</font><input type="text" id="o3dAlphaValueText" size="3"
+      <font color="#93ba7b" id="o3dAlphaValueLabel">Alpha：</font><input type="text" id="o3dAlphaValueText" size="3"
         value="100" />
       <label style="color: #ffffff;" id="smoothLabel">Smooth<input type="checkbox" name="3dSmooth"
           id="3dSmooth"></label>
@@ -94,8 +94,8 @@ function loadVR() {
     var span = document.createElement("SPAN");
     span.innerHTML =
         `<div id="WindowLevelDiv_VR" class="VR_div" style="background-color:#33666644;">
-    <font color="white" id="myWC_VR">WC：</font><input type="text" id="textWC_VR" value="520" />
-    <font color="white" id="myWW_VR">WW：</font><input type="text" id="textWW_VR" value="50" />
+    <font color="#93ba7b" id="myWC_VR">WC：</font><input type="text" id="textWC_VR" value="520" />
+    <font color="#93ba7b" id="myWW_VR">WW：</font><input type="text" id="textWW_VR" value="50" />
     <select id="WindowLevelSelect_VR">
       <option id="WindowDefault_VR" selected="selected">Default</option>
       <option id="WindowCustom_VR">Custom</option>

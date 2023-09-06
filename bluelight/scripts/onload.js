@@ -11,9 +11,9 @@ window.onload = function () {
 
 function loadLdcmview() {
   //左側面板樣式初始化
-  getByid("LeftPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
-  if (parseInt(getByid("LeftPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) { //getByid("LeftPicture").style.height=""+(window.innerHeight- document.getElementsByClassName("container")[0].offsetTop- (bordersize * 2))+"px";
-    getByid("LeftPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
+  getByid("thumbPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
+  if (parseInt(getByid("thumbPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) { //getByid("thumbPicture").style.height=""+(window.innerHeight- document.getElementsByClassName("container")[0].offsetTop- (bordersize * 2))+"px";
+    getByid("thumbPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
   }
 
   //隱藏一開始不需要的元素
@@ -179,7 +179,7 @@ function loadLdcmview() {
     count++;
     var labelWC1 = document.createElement("LABEL");
     labelWC1.className = "labelWC innerLabel";
-    labelWC1.style = "position:absolute;left:115px;bottom:30px;color: white;z-index: 10;-webkit-user-select: none; ";
+    labelWC1.style = "position:absolute;left:115px;bottom:30px;color: #93ba7b;z-index: 10;-webkit-user-select: none; ";
     GetViewport(count - 1).appendChild(labelWC1);
   }
   count = 0;
@@ -187,7 +187,7 @@ function loadLdcmview() {
     count++;
     var labelLT1 = document.createElement("LABEL");
     labelLT1.className = "labelLT innerLabel";
-    labelLT1.style = "position:absolute;left:115px;top:10px;color: white;z-index: 10;-webkit-user-select: none; ";
+    labelLT1.style = "position:absolute;left:115px;top:10px;color: #93ba7b;z-index: 10;-webkit-user-select: none; ";
     GetViewport(count - 1).appendChild(labelLT1);
   }
   count = 0;
@@ -195,7 +195,7 @@ function loadLdcmview() {
     count++;
     var labelRT1 = document.createElement("LABEL");
     labelRT1.className = "labelRT innerLabel";
-    labelRT1.style = "position:absolute;right:20px;top:10px;color: white;z-index: 10;-webkit-user-select: none;text-align:right;";
+    labelRT1.style = "position:absolute;right:20px;top:10px;color: #93ba7b;z-index: 10;-webkit-user-select: none;text-align:right;";
     GetViewport(count - 1).appendChild(labelRT1);
   }
   count = 0;
@@ -203,7 +203,7 @@ function loadLdcmview() {
     count++;
     var labelRB1 = document.createElement("LABEL");
     labelRB1.className = "labelRB innerLabel";
-    labelRB1.style = "position:absolute;right:20px;bottom:20px;color: white;z-index: 10;-webkit-user-select: none;text-align:right;";
+    labelRB1.style = "position:absolute;right:20px;bottom:20px;color: #93ba7b;z-index: 10;-webkit-user-select: none;text-align:right;";
     GetViewport(count - 1).appendChild(labelRB1);
   }
   count = 0;
@@ -211,7 +211,7 @@ function loadLdcmview() {
     count++;
     var labelXY1 = document.createElement("LABEL");
     labelXY1.className = "labelXY innerLabel";
-    labelXY1.style = "position:absolute;left:115px;bottom:10px;color: white;z-index: 10;-webkit-user-select: none; ";
+    labelXY1.style = "position:absolute;left:115px;bottom:10px;color: #93ba7b;z-index: 10;-webkit-user-select: none; ";
     labelXY1.innerText = "X: " + 0 + " Y: " + 0;
     GetViewport(count - 1).appendChild(labelXY1);
   }

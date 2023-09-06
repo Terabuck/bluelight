@@ -83,7 +83,7 @@ var SeriesCount = 0;
 //代表目前載入影像的Series UID --*
 //var NowSeries = "";
 //邊框寬度
-var bordersize = 5;
+var bordersize = 1;
 //label距離邊緣多遠
 var labelPadding = 3;
 var leftLabelPadding = labelPadding;

@@ -480,8 +480,8 @@ function drawBorder(element) {
   Css(getByid("zoom"), 'border', "");
   Css(getByid("b_Scroll"), 'border', "");
   Css(getByid("AngleRuler"), 'border', "");
-  Css(element, 'border', 3 + "px #FFFFFF solid");
-  Css(element, 'borderRadius', "3px 3px 3px 3px");
+  Css(element, 'border', 1 + "px #FFFFFF solid");
+  Css(element, 'borderRadius', "1px 1px 1px 1px");
 }
 
 function img2darkByClass(classname, dark) {

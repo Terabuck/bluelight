@@ -122,7 +122,7 @@ function PictureOnclick(series) {
 function LeftImg(str) {
     //暫時取消的功能
     return;
-    /*var pic = getByid("LeftPicture");
+    /*var pic = getByid("thumbPicture");
     var img = document.createElement("IMG");
     if (str == "Dose") {
         img.src = "../image/icon/black/rtdose.png"
@@ -137,7 +137,7 @@ function LeftImg(str) {
 }
 
 function SetToLeft(series, checki, patientid) {
-    var pic = getByid("LeftPicture");
+    var pic = getByid("thumbPicture");
     var outleftimg = getClass("OutLeftImg");
 
     let patientid_div = null;
@@ -149,7 +149,7 @@ function SetToLeft(series, checki, patientid) {
         out_div = document.createElement("DIV");
         out_div.className = "OutLeftImg";
         out_div.id = "OutLeftImg" + patientid;
-        out_div.style = "border:" + bordersize + "px #FFA3FF groove;padding:1px 1px 1px 1px;";
+        out_div.style = "border:" + bordersize + "px #488b3a solid;padding:1px 1px 1px 1px;";
         out_div.PatientId = patientid;
     } else {
         out_div = patientid_div;
@@ -158,7 +158,7 @@ function SetToLeft(series, checki, patientid) {
     div.id = "dicomDivListDIV" + dicomImageCount;
     div.className = "LeftImg";
     if (checki >= 0) div.id = "dicomDivListDIV" + checki;
-    div.style = "width:" + 65 + "px;height:" + 65 + "px;border:" + bordersize + "px #D3D9FF groove;";
+    div.style = "width:" + 65 + "px;height:" + 65 + "px;border:" + bordersize + "px #89d7b5 solid;";
     div.series = series;
     div.draggable = "true";
     div.style.touchAction = 'none';
@@ -264,9 +264,9 @@ function SetToLeft(series, checki, patientid) {
     if (checki >= 0)
         getByid("dicomDivListDIV" + checki).parentNode.replaceChild(div, getByid("dicomDivListDIV" + checki));
     else getByid("dicomDivListDIV" + dicomImageCount).parentNode.replaceChild(div, getByid("dicomDivListDIV" + dicomImageCount)); {
-        getByid("LeftPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
-        if (parseInt(getByid("LeftPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) {
-            getByid("LeftPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
+        getByid("thumbPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
+        if (parseInt(getByid("thumbPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) {
+            getByid("thumbPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
         }
     }
 

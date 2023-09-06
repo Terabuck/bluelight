@@ -16,7 +16,7 @@
   <script src="../scripts/external/other/lodash.min.js"></script>
   <script src="../scripts/external/other/interact.js"></script>
 
-  
+
   <script src="../scripts/external/cornerstone/cornerstone.min.js"></script>
   <script src="../scripts/external/cornerstone/dicomParser.js"></script>
   <script src="../scripts/external/cornerstone/dataDictionary.js"></script>
@@ -61,73 +61,122 @@
     .img {
       flex: 0 0 4.0%;
       max-width: calc(min(4.0%, 50px));
-      min-width: 35px;
+      min-width: 25px;
       width: 100%;
       height: 100%;
     }
 
     .innerLabel {
-      font-size: calc(0.4rem + 0.1*((5vw)));
+      font-size: calc(0.2rem + 0.1*((5vw)));
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
     }
   </style>
 </head>
 
-<body style="background-color:#000000;" onmousewheel="/*return false;*/">
+<body style="background-color:#272927;" onmousewheel="/*return false;*/">
   <header class="page-header" id="page-header">
+    
+    
+    
+    <div style="display:contents"><a href="https://misimagenes.online" target="_blank"
+      alt="Mis Imagenes Online Homepage"><img src="../image/icon/menubar/misimagenesonline.svg"
+        alt="misimagenes.online" style="max-width:2rem; margin:3px 2px 1px"></a>
+  </div>
+  <div style="display:contents">
+    <style>
+      :-webkit-full-screen {}
+
+      :-moz-full-screen {}
+
+      :-ms-fullscreen {}
+
+      :fullscreen {}
+    </style><img onclick="javascript:openFullscreen()" src="../image/icon/menubar/fullscreen.svg" alt="Fullscreen"
+      style="max-width:2rem; margin:3px 2px 1px">
+    <script>var elem = document.documentElement; function openFullscreen() { if (elem.requestFullscreen) { elem.requestFullscreen() } else if (elem.mozRequestFullScreen) { elem.mozRequestFullScreen() } else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen() } else if (elem.msRequestFullscreen) { elem.msRequestFullscreen() } }</script>
+    </img>
+  </div>
+
+  <div class="wvCustomTools" style="display:contents">
+    <img alt="QR" class="qr-button" src="../image/icon/menubar/qricon.svg"
+      style="max-width:2rem; margin:3px 2px 1px">
+    <div class="qr-dialog"><img alt="Close" class="qr-close-button" src="../image/icon/menubar/close.svg"></img>
+      <h3 class="dialog-title">Share</h3>
+      <div><img id="img" alt="QR" src="../image/icon/menubar/qricon.svg"
+          style="display:block;max-width:90%;margin:.5rem;" /></div>
+    </div>
+    <script>var qrButton = document.querySelector(".qr-button"); var qrDialog = document.querySelector(".qr-dialog"); var qrCloseButton = document.querySelector(".qr-close-button"); var api_url = "https://misimagenes.online/yourls-api.php?timestamp=1674415446&signature=6d8d7dfcbf6e7fb259aeefb90ece04a6"; var longUrl = escape(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; qrButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { document.getElementById("img").src = data.shorturl + ".qr"; { qrDialog.classList.add("is-open") } }) }); qrCloseButton.addEventListener("click", (event) => { qrDialog.classList.remove("is-open") });</script>
+  </div>
+  <div style="display:contents" class="wvCustomTools">
+    <img alt="Compartir" class="share-button" src="../image/icon/menubar/sharethis.svg"
+      style="max-width: 2rem; margin:3px 2px 1px">
+    <div class="share-dialog"><img alt="Close" class="close-button" src="../image/icon/menubar/close.svg"></img>
+      <h3 class="dialog-title">Attention</h3>
+      <div class="targets"><img alt="Facebook" onclick="fbShare()" src="../image/icon/menubar/facebook.svg"
+          class="share-icon" /><img alt="Twitter" onclick="ttShare()" src="../image/icon/menubar/twitter.svg"
+          class="share-icon" /><img alt="LinkedIn" onclick="inShare()" src="../image/icon/menubar/linkedin.svg"
+          class="share-icon" /><img alt="WhatsApp" onclick="waShare()" src="../image/icon/menubar/whatsapp.svg"
+          class="share-icon" /><img alt="Telegram" onclick="tgShare()" src="../image/icon/menubar/telegram.svg"
+          class="share-icon" /><img alt="Email" onclick="emShare()" src="../image/icon/menubar/email.svg"
+          class="share-icon" /></div>
+    </div>
+    <script>var shareButton = document.querySelector(".share-button"); var shareDialog = document.querySelector(".share-dialog"); var closeButton = document.querySelector(".close-button"); var api_url = "https://misimagenes.online/yourls-api.php?timestamp=1674415446&signature=6d8d7dfcbf6e7fb259aeefb90ece04a6"; var longUrl = encodeURIComponent(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; shareButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { if (navigator.share) { navigator.share({ title: "Compartir", text: "Por favor, siga este enlace para revisar el estudio de " + window.PatientName + " (" + window.StudyDescription + "): ", url: data.shorturl, }).then(() => { console.log("OK") }).catch(console.error) } else { shareDialog.classList.add("is-open") } }) }); closeButton.addEventListener("click", (event) => { shareDialog.classList.remove("is-open") }); function fbShare() { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(data.shorturl) + "&t=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function ttShare() { var response = $.get(api_url, api_params, function (data) { window.open("http://twitter.com/share?url=" + encodeURIComponent(data.shorturl) + "&text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): "), "twitsharer", "toolbar=0,status=0,width=626,height=436") }) } function inShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://www.linkedin.com/shareArticle?url=" + encodeURIComponent(data.shorturl) + "&title=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function waShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://wa.me/?text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): ") + encodeURIComponent(data.shorturl), "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function tgShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://telegram.me/share/url?url=" + data.shorturl, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function emShare() { var response = $.get(api_url, api_params, function (data) { window.open("mailto:?Subject=" + encodeURIComponent(document.title) + "&body=" + encodeURI(data.shorturl)) }) }</script>
+  </div>
     <span id="icon-list">
       <span id="openFile_span"><img class="img" type="file" alt="開檔" id="openFile"
-          src="../image/icon/black/openfile.png" width="50" height="50"></span>
-      <span id="MouseOperation_span"><img class="img VR MPR SEG" alt="平移與縮放" id="MouseOperation"
-          src="../image/icon/black/b_Pan.png" width="50" height="50"></span>
+          src="../image/icon/black/openfile.png" width="20" height="20"></span>
+      <span id="MouseOperation_span"><img class="img VR MPR SEG" alt="平 s移與縮放" id="MouseOperation"
+          src="../image/icon/black/b_Pan.png" width="20" height="20"></span>
       <span id="b_Scroll_span"><img class="img MPR" alt="b_Scroll" id="b_Scroll" src="../image/icon/black/b_Scroll.png"
-          width="50" height="50"></span>
+          width="20" height="20"></span>
       <span id="annotation1_span"><img class="img" alt="分隔" id="annotation1"
-          src="../image/icon/black/b_LayoutWithinViewport.png" width="50" height="50"></span>
+          src="../image/icon/black/b_LayoutWithinViewport.png" width="20" height="20"></span>
       <span id="MouseRotate_span"><img class="img MPR" alt="旋轉" id="MouseRotate"
-          src="../image/icon/black/b_Rotate 90 degrees clockwise.png" width="50" height="50"></span>
+          src="../image/icon/black/b_Rotate 90 degrees clockwise.png" width="20" height="20"></span>
       <span id="WindowRevision_span"><img class="img VR MPR SEG" alt="Window Level" id="WindowRevision"
-          src="../image/icon/black/b_Window.png" width="50" height="50"></span>
+          src="../image/icon/black/b_Window.png" width="20" height="20"></span>
       <span id="zoom_span"><img class="img" alt="放大鏡" id="zoom" src="../image/icon/black/b_Zoom.png" width="50"
           height="50"></span>
       <span id="horizontal_flip_span"><img class="img" alt="水平翻轉" id="horizontal_flip"
-          src="../image/icon/black/b_FlipHorizontally.png" width="50" height="50"></span>
+          src="../image/icon/black/b_FlipHorizontally.png" width="20" height="20"></span>
       <span id="vertical_flip_span"><img class="img" alt="垂直翻轉" id="vertical_flip" src="../image/icon/black/b_垂直翻轉.png"
-          width="50" height="50"></span>
+          width="20" height="20"></span>
       <span id="color_invert_span"><img class="img" alt="色彩反轉" id="color_invert"
-          src="../image/icon/black/b_InvertGrayscale.png" width="50" height="50"></span>
+          src="../image/icon/black/b_InvertGrayscale.png" width="20" height="20"></span>
       <span id="unlink_span"><img class="img" alt="連接" id="unlink"
-          src="../image/icon/black/b_unlink translation synchronization.png" width="50" height="50"></span>
+          src="../image/icon/black/b_unlink translation synchronization.png" width="20" height="20"></span>
       <span style="position:relative;">
-        <img class="img" id="openMeasureImg" src="../image/icon/black/M.png" width="50" height="50">
+        <img class="img" id="openMeasureImg" src="../image/icon/black/M.png" width="20" height="20">
         <div id="openMeasureDIv" style="position:absolute;left: 0;white-space:nowrap;z-index: 100;
         width: 500; display: none;background-color: black;">
           <span id="removeRuler_span">
-            <img alt="清除測量" id="removeRuler" src="../image/icon/black/X.png" width="50" height="50">
+            <img alt="清除測量" id="removeRuler" src="../image/icon/black/X.png" width="20" height="20">
           </span>
           <span id="MeasureRuler_span">
-            <img alt="測量" id="MeasureRuler" src="../image/icon/black/b_DistanceMeasurement.png" width="50" height="50">
+            <img alt="測量" id="MeasureRuler" src="../image/icon/black/b_DistanceMeasurement.png" width="20" height="20">
           </span>
           <span id="AngleRuler_span">
-            <img alt="角度" id="AngleRuler" src="../image/icon/black/b_AngleMeasurement.png" width="50" height="50">
+            <img alt="角度" id="AngleRuler" src="../image/icon/black/b_AngleMeasurement.png" width="20" height="20">
           </span>
         </div>
       </span>
 
       <span id="playvideo_span"><img class="img" alt="播放" id="playvideo" src="../image/icon/black/b_CinePlay.png"
-          width="50" height="50"></span>
+          width="20" height="20"></span>
       <span id="MarkButton_span"><img class="img VR MPR" alt="標記" id="MarkButton" src="../image/icon/black/fist0.png"
-          width="50" height="50"></span>
+          width="20" height="20"></span>
       <span id="annotation_span"><img class="img" alt="標籤" id="annotation" src="../image/icon/black/b_Annotation.png"
-          width="50" height="50"></span>
+          width="20" height="20"></span>
       <span id="MarkupImg_span"><img class="img VR MPR" alt="AIM" id="MarkupImg"
-          src="../image/icon/black/b_ShowReport.png" width="50" height="50"></span>
+          src="../image/icon/black/b_ShowReport.png" width="20" height="20"></span>
     </span>
     <span id="rwdImgTag_span"> <img class="img VR MPR XML PEN" alt="RWD" id="rwdImgTag"
-        src="../image/icon/black/b_CineTools.png" style="display:none;" width="50" height="50"></span>
+        src="../image/icon/black/b_CineTools.png" style="display:none;" width="20" height="20"></span>
 
     <div id="GraphicStyleDiv" style="background-color:#30306044;">
-      <label style="color: #ffffff;" id="GraphicColorLabel">Color：</label>
-      <select id="GraphiccolorSelect" style="background-color:#929292;font-weight:bold;font-size:16px;">
+      <label style="color: #93ba7b;" id="GraphicColorLabel">Color：</label>
+      <select id="GraphiccolorSelect"
+        style="background-color:#929292;font-weight:bold;font-size:16px;font-family: sans-serif;">
         <!--<option id="Graphicselected" selected="selected">Auto</option>-->
         <option id="GraphicBlackSelect" style="color: #000000;font-weight:bold;">Black(T7)</option>
         <option id="GraphicBlueSelect" style="color: #0000FF;font-weight:bold;" selected="selected">Blue(T8)</option>
@@ -143,7 +192,7 @@
       </select>
     </div>
     <div id="MarkStyleDiv" style="background-color:#00306044;">
-      <label style="color: #ffffff;" id="markColorLabel">Color：</label>
+      <label style="color: #93ba7b;" id="markColorLabel">Color：</label>
       <select id="MarkcolorSelect">
         <option selected="selected">Auto</option>
         <option id="WhiteSelect">White</option>
@@ -155,12 +204,12 @@
         <option id="OrangeSelect">Orange</option>
         <option id="PurpleSelect">Purple</option>
       </select>
-      <label style="color: #ffffff;" id="markAlphaLabel">Alpha<input type="text" id="markAlphaText"
+      <label style="color: #93ba7b;" id="markAlphaLabel">Alpha<input type="text" id="markAlphaText"
           value="35" /></label>
-      <label style="color: #ffffff;" id="markSizeLabel">Size<input type="text" id="markSizeText" value="0.45" /></label>
-      <label style="color: #ffffff;" id="markFillLabel">Fill<input type="checkbox" checked="true" name="markFillLabel"
+      <label style="color: #93ba7b;" id="markSizeLabel">Size<input type="text" id="markSizeText" value="0.45" /></label>
+      <label style="color: #93ba7b;" id="markFillLabel">Fill<input type="checkbox" checked="true" name="markFillLabel"
           id="markFillCheck"></label>
-      <label style="color: #ffffff;" id="TableLabel">Table：</label>
+      <label style="color: #93ba7b;" id="TableLabel">Table：</label>
       <select id="TableSelect">
         <option id="TableSelectNone" selected="selected">None</option>
         <option id="DICOMTagsSelect">DICOMTags</option>
@@ -172,18 +221,18 @@
     </div>
 
     <div id="SplitViewportDiv" style="background-color:#4D000044;">
-      <font color="white">1x1:<input type="radio" class="split_radio" name="split_radio" id="radio_1x1"
+      <font color="#93ba7b">1x1:<input type="radio" class="split_radio" name="split_radio" id="radio_1x1"
           checked="true" />　</font>
-      <font color="white">1x2:<input type="radio" class="split_radio" name="split_radio" id="radio_1x2" />　</font>
-      <font color="white">2x1:<input type="radio" class="split_radio" name="split_radio" id="radio_2x1" />　</font>
-      <font color="white">2x2:<input type="radio" class="split_radio" name="split_radio" id="radio_2x2" />　</font>
-      <font color="white">3x3:<input type="radio" class="split_radio" name="split_radio" id="radio_3x3" />　</font>
-      <font color="white">4x4:<input type="radio" class="split_radio" name="split_radio" id="radio_4x4" />　</font>
+      <font color="#93ba7b">1x2:<input type="radio" class="split_radio" name="split_radio" id="radio_1x2" />　</font>
+      <font color="#93ba7b">2x1:<input type="radio" class="split_radio" name="split_radio" id="radio_2x1" />　</font>
+      <font color="#93ba7b">2x2:<input type="radio" class="split_radio" name="split_radio" id="radio_2x2" />　</font>
+      <font color="#93ba7b">3x3:<input type="radio" class="split_radio" name="split_radio" id="radio_3x3" />　</font>
+      <font color="#93ba7b">4x4:<input type="radio" class="split_radio" name="split_radio" id="radio_4x4" />　</font>
     </div>
     <span id="WindowLevelDiv_span">
       <div id="WindowLevelDiv" style="background-color:#33666644;">
-        <font color="white" id="myWC">WC：</font><input type="text" id="textWC" value="520" />
-        <font color="white" id="myWW">WW：</font><input type="text" id="textWW" value="50" />
+        <font color="#93ba7b" id="myWC">WC：</font><input type="text" id="textWC" value="520" />
+        <font color="#93ba7b" id="myWW">WW：</font><input type="text" id="textWW" value="50" />
         <select id="WindowLevelSelect">
           <option id="WindowDefault" selected="selected">Default</option>
           <option id="WindowCustom">Custom</option>
@@ -196,15 +245,15 @@
         </select>
       </div>
     </span>
-    <font color="white" id="labelZoom">Zoom：</font><input type="text" id="textZoom" value="200" />
-    <font color="white" id="labelPlay">fps：</font><input type="text" id="textPlay" value="15" />
+    <font color="#93ba7b" id="labelZoom">Zoom：</font><input type="text" id="textZoom" value="200" />
+    <font color="#93ba7b" id="labelPlay">fps：</font><input type="text" id="textPlay" value="15" />
 
     <input type="file" id="myfile" multiple="multiple" style='display:none'>
   </header>
   <div class="form-group" id="form-group">
-    <label class="control-label col-sm-1" for="wadoURL">URL</label>
-    <div class="container">
-      <div id="LeftPicture"
+    <label class="control-label col-sm-1" for="wadoURL" style="display: none">URL</label>
+    <div class="container" style="margin-left: -8px;">
+      <div id="thumbPicture"
         style="overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:100%-50px;"
         width="100">
       </div>
@@ -221,4 +270,102 @@
         id="magnifierCanvas"></canvas></div>
 </body>
 
+<style>
+  .wvCustomTools {
+  *,
+  *::before,
+  *::after {
+  }
+
+  display: inline;
+
+  .dialog-title {
+    margin-top: 7px;
+    margin-bottom: 1px;
+    padding-bottom: 9px;
+    padding-left: 4px;
+    font-size: 1.3rem;
+    margin-right: -3px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #929796;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #f9f9f9;
+  }
+
+  .button:hover {
+    border-color: #cdd;
+  }
+
+  .qr-dialog {
+    margin-top: 0.3rem;
+    display: none;
+    max-width: 100%;
+    z-index: -1;
+    border: 1px solid #007b36;
+    background-color: #494a48;
+  }
+
+  .qr-dialog.is-open {
+    display: block;
+    z-index: 2;
+  }
+
+  .qr-close-button {
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    padding: 3px;
+    float: right;
+  }
+
+  .share-dialog {
+    margin-top: 0.3rem;
+    display: none;
+    max-width: 100%;
+    z-index: -1;
+    border: 1px solid #007b36;
+    background-color: #494a48;
+  }
+
+  .share-dialog.is-open {
+    display: block;
+    z-index: 2;
+  }
+
+  .targets {
+    display: contents;
+    margin: 0.5rem;
+  }
+
+  .share-icon {
+    max-width: 3rem;
+    margin: 0.3rem;
+  }
+
+  .close-button {
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    padding: 3px;
+    float: right;
+  }
+}
+</style>
 </html>

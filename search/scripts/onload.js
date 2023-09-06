@@ -135,7 +135,7 @@ function createTable() {
   // row0.className = "table-primary ";
   row0.style.color = "#ffffff";
   //row0.style.backgroundColor = "#203852";
-  row0.style.background = "linear-gradient(rgb(32, 56, 82), rgb(64, 82, 144), rgb(32, 56, 82))";//"linear-gradient(rgb(132, 156, 182,0.2), rgb(164, 202, 264,0.4), rgb(132, 156, 182,0.2))";
+  row0.style.background = "#2c2c2c";//"linear-gradient(rgb(132, 156, 182,0.2), rgb(164, 202, 264,0.4), rgb(132, 156, 182,0.2))";
   var cells0 = row0.insertCell(0);
   cells0.innerHTML = "Patient ID";
   var cells1 = row0.insertCell(1);

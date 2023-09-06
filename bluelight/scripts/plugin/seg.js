@@ -10,12 +10,12 @@ function loadWriteSEG() {
     var span = document.createElement("SPAN")
     span.innerHTML =
         `<div id="SegStyleDiv" style="background-color:#30306044;">
-    <font color="white">ManufacturerModelName：</font><input type="text" id="SegManufacturerModelName"
+    <font color="#93ba7b">ManufacturerModelName：</font><input type="text" id="SegManufacturerModelName"
       value="ModelName" size="8" />
-    <font color="white">SeriesDescription：</font><input type="text" id="SegSeriesDescription" value="Research"
+    <font color="#93ba7b">SeriesDescription：</font><input type="text" id="SegSeriesDescription" value="Research"
       size="8" />
-    <font color="white">SegmentLabel</font><input type="text" id="SegSegmentLabel" value="SegmentLabel" size="8" />
-    <font color="white">Brush Size</font><input type="text" id="SegBrushSizeText" value="10" size="2" />
+    <font color="#93ba7b">SegmentLabel</font><input type="text" id="SegSegmentLabel" value="SegmentLabel" size="8" />
+    <font color="#93ba7b">Brush Size</font><input type="text" id="SegBrushSizeText" value="10" size="2" />
     &nbsp;&nbsp;<button id="overlay2seg" sytle="">OverLay to Seg</button>
   </div>`
     getByid("page-header").appendChild(span);
@@ -79,7 +79,6 @@ getByid("writeSEG").onclick = function () {
         getByid("overlay2seg").style.display = "";
         getByid('SegStyleDiv').style.display = 'flex';
         set_BL_model('writeSeg');
-        openWheel = true;
         writeSeg();
     }
     else getByid('SegStyleDiv').style.display = 'none';
@@ -470,7 +469,7 @@ function get_SEG_context() {
 
 function Line_setSEG2PixelData(point1, point2) {
     if (!point1 || !point2) return;
-    var distance = (Math.sqrt(((point1[0] - point2[0]) * (point1[0] - point2[0]) + (point1[1] - point2[1]) * (point1[1] - point2[1]))));
+    var distance = (Math.sqrt(((point1[0] - point2[0]) * (point1[0] - point2[0]) + (point1[1] - point2[1]) - (point1[1] - point2[1]))));
 
     var Reduce_X = point1[0] > point2[0] ? point2[0] : point1[0];
     var Reduce_Y = point1[1] > point2[1] ? point2[1] : point1[1];

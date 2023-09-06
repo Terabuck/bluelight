@@ -25,7 +25,7 @@ function loadWriteGraphic() {
           <option id="GSPSYellowSelect" style="color: #FFFF00;font-weight:bold;"> Yellow</option>
           <option id="GSPSWhiteSelect" style="color: #FFFFFF;font-weight:bold;">White</option>
         </select>
-        <font color="white">Name：</font><input type="text" id="GspsName" value="T1" size="8" />
+        <font color="#93ba7b">Name：</font><input type="text" id="GspsName" value="T1" size="8" />
         <select id="GspsTypeSelect" style="background-color:#929292;font-weight:bold;font-size:16px;">
           <option id="GspsPOLYLINE" selected="selected">Rectangle</option>
           <option id="GspsCIRCLE">Circle</option>

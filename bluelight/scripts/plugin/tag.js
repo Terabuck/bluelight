@@ -8,7 +8,7 @@ function loadWriteTAG() {
     var span = document.createElement("SPAN")
     span.innerHTML =
         `<div id="TagStyleDiv" style="background-color:#30306044;">
-        <span style="color: white;" id="medicalSpecialtyTagSpan">Medical specialty：</span>
+        <span style="color: #93ba7b;" id="medicalSpecialtyTagSpan">Medical specialty：</span>
         <select id="medicalSpecialtyTag">
         </select>
       </div>`
@@ -38,7 +38,7 @@ function readImageTags(url) {
             let tagDiv = document.getElementById("TagStyleDiv");
             let diseasesDiv = document.createElement('div');
             diseasesDiv.id = medicalSpecialtyName;
-            diseasesDiv.style.color = "white";
+            diseasesDiv.style.color = "#93ba7b";
             tagDiv.appendChild(diseasesDiv);
 
             let diseases = Object.entries(value['diseases']);

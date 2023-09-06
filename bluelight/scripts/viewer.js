@@ -1,4 +1,3 @@
-
 let VIEWPORT = {};
 VIEWPORT.fixRow = null;
 VIEWPORT.fixCol = null;
@@ -83,9 +82,9 @@ putLabel2Element(element, image, viewportNum);//putLabel
 //當視窗大小改變
 window.onresize = function () {
     //設定左側面板的style
-    getByid("LeftPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
-    if (parseInt(getByid("LeftPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) { //getByid("LeftPicture").style.height=""+(window.innerHeight- document.getElementsByClassName("container")[0].offsetTop- (bordersize * 2))+"px";
-        getByid("LeftPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
+    getByid("thumbPicture").style = "display: flex;flex-direction: column;position: absolute;z-index: 9";
+    if (parseInt(getByid("thumbPicture").offsetHeight) + 10 >= window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) { //getByid("thumbPicture").style.height=""+(window.innerHeight- document.getElementsByClassName("container")[0].offsetTop- (bordersize * 2))+"px";
+        getByid("thumbPicture").style = "overflow-y: scroll;display: flex;flex-direction: column;position: absolute;z-index: 9;height:" + (window.innerHeight - document.getElementsByClassName("container")[0].offsetTop - (bordersize * 2)) + "px;"
     }
     //刷新每個Viewport
     for (i = 0; i < Viewport_Total; i++) {
@@ -103,7 +102,7 @@ window.onresize = function () {
     //暫時移除的功能
     /*if (openPenDraw == true) {
         var WandH = getFixSize(window.innerWidth, window.innerHeight, GetViewport(0));
-        GetViewport(0).style = "position:relative;float: top;left:100px;width:calc(100% - " + (100 + (bordersize * 2)) + "px);" + "height:" + (WandH[1] - (bordersize * 2)) + "px;overflow:hidden;border:" + bordersize + "px #D3D9FF groove;margin:0px";
+        GetViewport(0).style = "position:relative;float: top;left:100px;width:calc(100% - " + (100 + (bordersize * 2)) + "px);" + "height:" + (WandH[1] - (bordersize * 2)) + "px;overflow:hidden;border:" + bordersize + "px #89d7b5 solid;margin:0px";
     }*/
     try { //需要再做更正--*
         var height = window.innerHeight;
@@ -378,6 +377,7 @@ function wadorsLoader(url, onlyload) {
     return getData();
 }
 
+// Create a function to display the PDF file
 function displayPDF(pdf) {
     getClass("DicomCanvas")[viewportNumber].width = getClass("DicomCanvas")[viewportNumber].height = 1;
     GetViewportMark(viewportNumber).width = GetViewportMark(viewportNumber).height = 1;
@@ -388,16 +388,30 @@ function displayPDF(pdf) {
         element.windowCenter = element.windowWidth = element.sop = undefined;
 
     VIEWPORT.delPDFView(element);
-    var iFrame = document.createElement("iframe");
+
+    if (navigator.pdfViewerEnabled) {
+        // The browser does not support inline viewing of PDF files.
+        var PDFjsViewer = pdf;        
+      }
+    else {
+        // The browser supports inline viewing of PDF files.
+        var PDFjsViewer = `../scripts/pdfjs/web/viewer.html??file=${pdf}`;
+    }
+
+    // Create an iframe to display the PDF file
+    const iFrame = document.createElement("iframe");
     iFrame.className = "PDFView";
     iFrame.id = "PDFView_" + viewportNumber;
-    iFrame.src = pdf;
+    iFrame.src = PDFjsViewer;
+    iFrame.load = "lazy"
     iFrame.style.width = iFrame.style.height = "100%";
     iFrame.style.left = "0px";
     iFrame.style.position = "absolute";
     element.appendChild(iFrame);
     element.PDFView = iFrame;
 
+
+  
     getClass("labelWC")[viewportNumber].style.display = "none";
     getClass("labelLT")[viewportNumber].style.display = "none";
     getClass("labelRT")[viewportNumber].style.display = "none";
@@ -747,7 +761,7 @@ function parseDicom(image, pixelData, viewportNum0) {
     //顯示資訊到label
     DisplaySeriesCount(viewportNum);
     var HandW = getStretchSize(element.imageWidth, element.imageHeight, element);
-    element.style = "position:block;left:100px;width:" + element.imageWidth + "px;height:" + element.imageHeight + "px;overflow:hidden;border:" + bordersize + "px #D3D9FF groove;";
+    element.style = "position:block;left:100px;width:" + element.imageWidth + "px;height:" + element.imageHeight + "px;overflow:hidden;border:" + bordersize + "px #89d7b5 solid;";
     element.sop = element.SOPInstanceUID;
 
     //渲染影像到viewport和原始影像
@@ -766,7 +780,7 @@ function parseDicom(image, pixelData, viewportNum0) {
     SetTable();
 
     GetViewport().style.backgroundColor = "rgb(10,6,6)";
-    GetViewport().style.border = bordersize + "px #FFC3FF groove";
+    GetViewport().style.border = bordersize + "px #488b3a solid";
 
     //渲染上去後畫布應該從原始大小縮小為適當大小
     var HandW = getViewprtStretchSize(element.imageWidth, element.imageHeight, element);
@@ -822,7 +836,7 @@ function onlyLoadImage(imageId) {
                 usePDFJS: true
             }).then(function (image) {
                 if (image.data.intString("x00280008") > 1) {//muti frame
-                    loadDicomMultiFrame(image, image.imageId, viewportNum0);
+                    loadDicomMutiFrame(image, image.imageId, viewportNum0);
                 } else {
                     var DICOM_obj = {
                         study: image.data.string('x0020000d'),
@@ -864,7 +878,7 @@ function loadAndViewImage(imageId, viewportNum0, framesNumber) {
             }).then(function (image) {
 
                 if (image.data.intString("x00280008") > 1) {//muti frame
-                    loadDicomMultiFrame(image, image.imageId, viewportNum0);
+                    loadDicomMutiFrame(image, image.imageId, viewportNum0);
                 } else {
                     var DICOM_obj = {
                         study: image.data.string('x0020000d'),
@@ -1029,18 +1043,19 @@ function SetTable(row0, col0) {
     try {
         var WandH = getViewportFixSize(window.innerWidth, window.innerHeight, row, col);
         for (var i = 0; i < Viewport_Total; i++)
-            GetViewport(i).style = "position:relative;float: left;left:100px;overflow:hidden;border:" + bordersize + "px #D3D9FF groove;margin:0px";
+            GetViewport(i).style = "position:relative;float: left;left:72px;overflow:hidden;border:" + bordersize + "px #488b3a solid;margin:0px;background-color: #000000;";
         for (var r = 0; r < row; r++) {
             for (var c = 0; c < col; c++) {
-                GetViewport(r * col + c).style.width = "calc(" + parseInt(100 / col) + "% - " + (parseInt(100 / col) + (bordersize * 2)) + "px)";
-                GetViewport(r * col + c).style.height = (WandH[1] - (bordersize * 2)) + "px";
+                GetViewport(r * col + c).style.width = "calc(" + parseInt(100 / col) + "% - " + (parseInt(100 / col) + (bordersize * 2 - (30/col    )-  5)) + "px)";
+                GetViewport(r * col + c).style.height = (WandH[1] - (bordersize * 2)+4) + "px";
+
             }
         }
     } catch (ex) { }
     //重置各個Viewport的長寬大小(不顯示時)
     for (var i = row * col; i < Viewport_Total; i++) {
         try {
-            GetViewport(i).style = "position:relative;float: right;;width:0px;" + "height:" + 0 + "px;overflow:hidden;border:" + 0 + "px #D3D9FF groove;margin:0px";
+            GetViewport(i).style = "position:relative;float: right;;width:0px;" + "height:" + 0 + "px;overflow:hidden;border:" + 0 + "px #89d7b5 solid;margin:0px";
         } catch (ex) { }
     }
     // window.onresize();
