@@ -216,7 +216,7 @@ function createTable() {
       Table.style.color = "#000000";
       Table.style.position = "absolute"
       Table.className = "table table-striped";
-      Table.style.backgroundColor = "rgb(210,222,239)"
+      Table.style.backgroundColor = "rgb(68,129,96)"
       Table.setAttribute("border", 2);
       Table.style.borderColor = 'black';
 
@@ -233,15 +233,15 @@ function createTable() {
 
       var Table2 = document.createElement("table");
       Table2.id = "floatTable2";
-      Table2.style.color = "#000000";
+      Table2.style.color = "#c6d7cb";
       Table2.style.position = "absolute"
       Table2.className = "table table-striped";
-      Table2.style.backgroundColor = "rgb(255,242,204)"
+      Table2.style.backgroundColor = "rgb(44,81,64)"
       Table2.setAttribute("border", 2);
       Table2.style.borderColor = 'black';
 
       var row0 = Table2.insertRow(0);
-      row0.style.background = "linear-gradient(rgb(32, 56, 82,0.1), rgb(64, 102, 164,0.7), rgb(32, 56, 82,0.1))";
+      row0.style.background = "rgb(30, 55, 43)";
       row0.insertCell(0).innerHTML = "<img src='../image/icon/x.png' onclick='hidefloatTable()'></img>";
       row0.insertCell(1).innerHTML = "Modality";
       row0.insertCell(2).innerHTML = "Series Description";
@@ -260,7 +260,7 @@ function createTable() {
       cell.onclick = function () { window.open(this.alt, '_blank'); }
       var cell = row1.insertCell(1); cell.innerHTML = "StudyInstanceUID=" + this.Study.StudyUID;
       row1.className = "SecondRow2";
-      row1.style.backgroundColor = "rgb(210,222,239)"
+      row1.style.backgroundColor = "rgb(68,129,96)"
       cell.colSpan = 4;
       //row1.style.whiteSpace = "nowrap";
       // row1.insertCell(2).innerHTML = "";
@@ -319,8 +319,8 @@ function createTable() {
         getByid("floatTable2").parentNode.replaceChild(Table2, getByid("floatTable2"));
       } catch (ex) { console.log(ex); }
 
-      Table.style.marginLeft = (30) + 'px';// Table.style.marginLeft = (this.getClientRects()[0].x) - (getByid("myTable1").getClientRects()[0].x) +
-      Table2.style.marginLeft = (30) + 'px';// 
+      Table.style.marginLeft = (8) + 'px';// Table.style.marginLeft = (this.getClientRects()[0].x) - (getByid("myTable1").getClientRects()[0].x) +
+      Table2.style.marginLeft = (8) + 'px';// 
       Table.style.marginTop = (this.getClientRects()[0].y) + (this.getClientRects()[0].height * 1) + (Table2.getClientRects()[0].height) - (getByid("myTable1").getClientRects()[0].y) + 'px';
       Table2.style.marginTop = (parseInt(Table.style.marginTop) - 0) - (Table2.getClientRects()[0].height) + 'px';
       Table.style.marginTop = parseFloat(Table.style.marginTop) - (Table2.getClientRects()[0].height) + (this.getClientRects()[0].height * 1) + 'px';
