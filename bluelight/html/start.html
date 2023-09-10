@@ -70,6 +70,103 @@
       font-size: calc(0.2rem + 0.1*((5vw)));
       font-family: "Open Sans", Helvetica, Arial, sans-serif;
     }
+      .wvCustomTools {
+  *,
+  *::before,
+  *::after {
+  }
+
+  display: inline;
+
+  .dialog-title {
+    margin-top: 7px;
+    margin-bottom: 1px;
+    padding-bottom: 9px;
+    padding-left: 4px;
+    font-size: 1.3rem;
+    margin-right: -3px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #929796;
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background-color: #f9f9f9;
+  }
+
+  .button:hover {
+    border-color: #cdd;
+  }
+
+  .qr-dialog {
+    margin-top: 0.3rem;
+    display: none;
+    max-width: 100%;
+    z-index: -1;
+    border: 1px solid #007b36;
+    background-color: #494a48;
+  }
+
+  .qr-dialog.is-open {
+    display: block;
+    z-index: 2;
+  }
+
+  .qr-close-button {
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    padding: 3px;
+    float: right;
+  }
+
+  .share-dialog {
+    margin-top: 0.3rem;
+    display: none;
+    max-width: 100%;
+    z-index: -1;
+    border: 1px solid #007b36;
+    background-color: #494a48;
+  }
+
+  .share-dialog.is-open {
+    display: block;
+    z-index: 2;
+  }
+
+  .targets {
+    display: contents;
+    margin: 0.5rem;
+  }
+
+  .share-icon {
+    max-width: 3rem;
+    margin: 0.3rem;
+  }
+
+  .close-button {
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    padding: 3px;
+    float: right;
+  }
+}
+
   </style>
 </head>
 
@@ -105,7 +202,7 @@
       <div><img id="img" alt="QR" src="../image/icon/menubar/qricon.svg"
           style="display:block;max-width:90%;margin:.5rem;" /></div>
     </div>
-    <script>var qrButton = document.querySelector(".qr-button"); var qrDialog = document.querySelector(".qr-dialog"); var qrCloseButton = document.querySelector(".qr-close-button"); var api_url = "https://misimagenes.online/yourls-api.php?timestamp=1674415446&signature=6d8d7dfcbf6e7fb259aeefb90ece04a6"; var longUrl = escape(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; qrButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { document.getElementById("img").src = data.shorturl + ".qr"; { qrDialog.classList.add("is-open") } }) }); qrCloseButton.addEventListener("click", (event) => { qrDialog.classList.remove("is-open") });</script>
+    <script>var qrButton = document.querySelector(".qr-button"); var qrDialog = document.querySelector(".qr-dialog"); var qrCloseButton = document.querySelector(".qr-close-button"); var api_url = "https://misimagenes.online/yourls-api.php?timestamp=1684786618&signature=3763145d8e9e6d7bcc013c38bb182cb6"; var longUrl = escape(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; qrButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { document.getElementById("img").src = data.shorturl + ".qr"; { qrDialog.classList.add("is-open") } }) }); qrCloseButton.addEventListener("click", (event) => { qrDialog.classList.remove("is-open") });</script>
   </div>
   <div style="display:contents" class="wvCustomTools">
     <img alt="Compartir" class="share-button" src="../image/icon/menubar/sharethis.svg"
@@ -120,7 +217,7 @@
           class="share-icon" /><img alt="Email" onclick="emShare()" src="../image/icon/menubar/email.svg"
           class="share-icon" /></div>
     </div>
-    <script>var shareButton = document.querySelector(".share-button"); var shareDialog = document.querySelector(".share-dialog"); var closeButton = document.querySelector(".close-button"); var api_url = "https://misimagenes.online/yourls-api.php?timestamp=1674415446&signature=6d8d7dfcbf6e7fb259aeefb90ece04a6"; var longUrl = encodeURIComponent(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; shareButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { if (navigator.share) { navigator.share({ title: "Compartir", text: "Por favor, siga este enlace para revisar el estudio de " + window.PatientName + " (" + window.StudyDescription + "): ", url: data.shorturl, }).then(() => { console.log("OK") }).catch(console.error) } else { shareDialog.classList.add("is-open") } }) }); closeButton.addEventListener("click", (event) => { shareDialog.classList.remove("is-open") }); function fbShare() { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(data.shorturl) + "&t=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function ttShare() { var response = $.get(api_url, api_params, function (data) { window.open("http://twitter.com/share?url=" + encodeURIComponent(data.shorturl) + "&text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): "), "twitsharer", "toolbar=0,status=0,width=626,height=436") }) } function inShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://www.linkedin.com/shareArticle?url=" + encodeURIComponent(data.shorturl) + "&title=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function waShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://wa.me/?text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): ") + encodeURIComponent(data.shorturl), "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function tgShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://telegram.me/share/url?url=" + data.shorturl, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function emShare() { var response = $.get(api_url, api_params, function (data) { window.open("mailto:?Subject=" + encodeURIComponent(document.title) + "&body=" + encodeURI(data.shorturl)) }) }</script>
+    <script>var shareButton = document.querySelector(".share-button"); var shareDialog = document.querySelector(".share-dialog"); var closeButton = document.querySelector(".close-button"); var api_url = "https://misimagenes.online/yourls-api.php?1684786618&signature=3763145d8e9e6d7bcc013c38bb182cb6"; var longUrl = encodeURIComponent(window.location.href); var api_params = { action: "shorturl", format: "json", url: longUrl }; shareButton.addEventListener("click", (event) => { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { if (navigator.share) { navigator.share({ title: "Compartir", text: "Por favor, siga este enlace para revisar el estudio de " + window.PatientName + " (" + window.StudyDescription + "): ", url: data.shorturl, }).then(() => { console.log("OK") }).catch(console.error) } else { shareDialog.classList.add("is-open") } }) }); closeButton.addEventListener("click", (event) => { shareDialog.classList.remove("is-open") }); function fbShare() { var response = $.get(api_url, { action: "shorturl", format: "json", url: longUrl }, function (data) { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(data.shorturl) + "&t=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function ttShare() { var response = $.get(api_url, api_params, function (data) { window.open("http://twitter.com/share?url=" + encodeURIComponent(data.shorturl) + "&text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): "), "twitsharer", "toolbar=0,status=0,width=626,height=436") }) } function inShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://www.linkedin.com/shareArticle?url=" + encodeURIComponent(data.shorturl) + "&title=" + document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600") }) } function waShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://wa.me/?text=" + encodeURIComponent("Por favor, siga este enlace para revisar el estudio de ") + encodeURIComponent(window.PatientName) + encodeURIComponent(" (") + encodeURIComponent(window.StudyDescription) + encodeURIComponent("): ") + encodeURIComponent(data.shorturl), "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function tgShare() { var response = $.get(api_url, api_params, function (data) { window.open("https://telegram.me/share/url?url=" + data.shorturl, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600") }) } function emShare() { var response = $.get(api_url, api_params, function (data) { window.open("mailto:?Subject=" + encodeURIComponent(document.title) + "&body=" + encodeURI(data.shorturl)) }) }</script>
   </div>
     <span id="icon-list">
       <span id="openFile_span"><img class="img" type="file" alt="開檔" id="openFile"
@@ -270,102 +367,4 @@
         id="magnifierCanvas"></canvas></div>
 </body>
 
-<style>
-  .wvCustomTools {
-  *,
-  *::before,
-  *::after {
-  }
-
-  display: inline;
-
-  .dialog-title {
-    margin-top: 7px;
-    margin-bottom: 1px;
-    padding-bottom: 9px;
-    padding-left: 4px;
-    font-size: 1.3rem;
-    margin-right: -3px;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #929796;
-    text-align: center;
-    padding: 0.5rem 0;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.1;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    background-color: #f9f9f9;
-  }
-
-  .button:hover {
-    border-color: #cdd;
-  }
-
-  .qr-dialog {
-    margin-top: 0.3rem;
-    display: none;
-    max-width: 100%;
-    z-index: -1;
-    border: 1px solid #007b36;
-    background-color: #494a48;
-  }
-
-  .qr-dialog.is-open {
-    display: block;
-    z-index: 2;
-  }
-
-  .qr-close-button {
-    background-color: transparent;
-    border: none;
-    width: 3rem;
-    height: 3rem;
-    padding: 3px;
-    float: right;
-  }
-
-  .share-dialog {
-    margin-top: 0.3rem;
-    display: none;
-    max-width: 100%;
-    z-index: -1;
-    border: 1px solid #007b36;
-    background-color: #494a48;
-  }
-
-  .share-dialog.is-open {
-    display: block;
-    z-index: 2;
-  }
-
-  .targets {
-    display: contents;
-    margin: 0.5rem;
-  }
-
-  .share-icon {
-    max-width: 3rem;
-    margin: 0.3rem;
-  }
-
-  .close-button {
-    background-color: transparent;
-    border: none;
-    width: 3rem;
-    height: 3rem;
-    padding: 3px;
-    float: right;
-  }
-}
-</style>
 </html>
